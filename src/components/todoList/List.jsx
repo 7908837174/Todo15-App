@@ -2,45 +2,31 @@ import React, { useState, useEffect } from "react";
 
 import ListItem from "./ListItem";
 import AddItem from "./AddItem";
+import todoService from "../../services/todo.service";
 
 const List = () => {
   const [items, setItems] = useState([]);
 
-  const getItems = () => {
-    // setItems([]);
+  const getItems = async () => {
+    const result = await todoService.getTodos();
+    setItems(result);
   };
 
-  // TODO: Add a useEffect to fetch the items from the server
-  // Add functionality to add items to the server
-  const addItem = (text) => {
-    setItems((prevItems) => [
-      ...prevItems,
-      { id: prevItems.length + 1, text, completed: false },
-    ]);
+  const addItem = async (text) => {
+    await todoService.addTodo(text);
     getItems();
   };
 
-  // TODO: Add delete item functionality
-  const removeItem = (id) => {
-    setItems((prevItems) => {
-      return prevItems.filter((item) => item.id !== id);
-    });
+  const removeItem = async (id) => {
+    await todoService.deleteTodo(id);
     getItems();
   };
 
-  // TODO: Add toggle item functionality
-  const toggleItem = (id) => {
-    setItems((prevItems) => {
-      return prevItems.map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            completed: !item.completed,
-          };
-        }
-        return item;
-      });
-    });
+  const toggleItem = async (id) => {
+    const foundItem = items.find((item) => item.id === id);
+    foundItem.completed = !foundItem.completed;
+    await todoService.updateTodo(foundItem);
+
     getItems();
   };
 

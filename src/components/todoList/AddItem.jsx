@@ -15,7 +15,7 @@ const AddItem = ({ handleSubmit }) => {
 
   return (
     <form name="newform">
-      <label for="newitem">Add to the todo list</label>
+      <label htmlFor="newitem">Add to the todo list</label>
       <input type="text" id="newitem" value={text} onChange={handleChange} />
       <button type="submit" onClick={handleSubmitForm.bind(this)}>
         Add item
