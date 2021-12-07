@@ -11,22 +11,26 @@ const ListItem = ({ item, toggleItem, removeItem }) => {
 
   return (
     <li className={item.completed ? "done" : ""}>
-      <span className="label">{item.text}</span>
+      <div className="label-container">
+        <div className="actions actions-right">
+          <button
+            className="btn"
+            type="button"
+            title={item.completed ? "Undone" : "Done"}
+            onClick={onToggle}
+          >
+            <i className="material-icons">
+              {item.completed ? "check_box" : "check_box_outline_blank"}
+            </i>
+          </button>
+        </div>
 
-      <div className="actions">
-        <button
-          className="btn-picto"
-          type="button"
-          title={item.completed ? "Undone" : "Done"}
-          onClick={onToggle}
-        >
-          <i className="material-icons">
-            {item.completed ? "check_box" : "check_box_outline_blank"}
-          </i>
-        </button>
+        <span className="label">{item.text}</span>
+      </div>
 
+      <div className="actions actions-left">
         <button
-          className="btn-picto"
+          className="btn"
           type="button"
           title="Delete"
           onClick={onDelete}
