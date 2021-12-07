@@ -78,7 +78,7 @@
 
   opacity: 0;
   transform: translateX(-100%);
-  animation: createItem 0.3s ease-out 0.3s forwards;
+  animation: createItem 0.3s ease-out 0s forwards;
 }
 
 .label-container {

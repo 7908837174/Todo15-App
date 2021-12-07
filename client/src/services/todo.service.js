@@ -1,29 +1,43 @@
+import localStorageService from "./localStorage.service";
+
 class TodoService {
   constructor() {
-    this.todos = [];
+    this.todoLabel = "todos";
   }
 
   async getTodos() {
-    return this.todos;
+    const foundData = localStorageService.get(this.todoLabel, { parsed: true });
+    if (!foundData || !foundData.length) {
+      localStorageService.set(this.todoLabel, [], { parsed: true });
+      return [];
+    }
+    return foundData;
   }
 
   async addTodo(text) {
-    const todo = { id: this.todos.length + 1, text, completed: false };
-    this.todos = [todo, ...this.todos];
+    const todos = await this.getTodos();
+    const todo = { id: new Date().getTime(), text, completed: false };
+    localStorageService.set(this.todoLabel, [todo, ...todos], { parsed: true });
     return todo;
   }
 
   async deleteTodo(id) {
-    this.todos = this.todos.filter((t) => t.id !== id);
+    const todos = await this.getTodos();
+    const newTodos = todos.filter((t) => t.id !== id);
+    localStorageService.set(this.todoLabel, newTodos, { parsed: true });
+    return id;
   }
 
   async updateTodo(todo) {
-    this.todos = this.todos.map((t) => {
+    const todos = await this.getTodos();
+    const newTodos = todos.map((t) => {
       if (t.id === todo.id) {
         return Object.assign({}, todo);
       }
       return t;
     });
+    localStorageService.set(this.todoLabel, newTodos, { parsed: true });
+    return todo;
   }
 }
 export default new TodoService();
