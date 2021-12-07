@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import ListItem from "./ListItem";
+import './List.css';
 import AddItem from "./AddItem";
+import ListItem from "./ListItem";
 import todoService from "../../services/todo.service";
 
 const List = () => {

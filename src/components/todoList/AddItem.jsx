@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import "./AddItem.css";
+
 const AddItem = ({ handleSubmit }) => {
   const [text, setText] = useState("");
 
@@ -14,12 +16,16 @@ const AddItem = ({ handleSubmit }) => {
   };
 
   return (
-    <form name="newform">
-      <label htmlFor="newitem">Add to the todo list</label>
-      <input type="text" id="newitem" value={text} onChange={handleChange} />
-      <button type="submit" onClick={handleSubmitForm.bind(this)}>
-        Add item
-      </button>
+    <form onSubmit={handleSubmitForm.bind(this)}>
+      <label htmlFor="newItem">Add to the todo list</label>
+      <input
+        type="text"
+        id="newItem"
+        value={text}
+        onChange={handleChange}
+        required
+      />
+      <button type="submit">Add item</button>
     </form>
   );
 };
