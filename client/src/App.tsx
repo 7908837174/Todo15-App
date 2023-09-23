@@ -1,8 +1,6 @@
-import React from "react";
+import List from "./components/List.tsx";
 
-import List from "../components/todoList/List";
-
-const Home = () => {
+const App = () => {
   return (
     <main id="todolist">
       <h1>
@@ -15,4 +13,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default App;

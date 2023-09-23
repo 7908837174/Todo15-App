@@ -1,5 +1,3 @@
-import React from "react";
-
 const ListItem = ({ item, toggleItem, removeItem }) => {
   const onToggle = () => {
     toggleItem(item.id);
@@ -29,12 +27,7 @@ const ListItem = ({ item, toggleItem, removeItem }) => {
       </div>
 
       <div className="actions actions-left">
-        <button
-          className="btn"
-          type="button"
-          title="Delete"
-          onClick={onDelete}
-        >
+        <button className="btn" type="button" title="Delete" onClick={onDelete}>
           <i className="material-icons">delete</i>
         </button>
       </div>

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import './List.css';
-import AddItem from "./AddItem";
-import ListItem from "./ListItem";
-import todoService from "../../services/todo.service";
+import "./List.css";
+import AddItem from "./AddItem.tsx";
+import ListItem from "./ListItem.tsx";
+import todoService from "../services/todo.service.js";
 
 const List = () => {
   const [items, setItems] = useState([]);
