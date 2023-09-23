@@ -1,6 +1,6 @@
 import localStorageService from "./localStorage.service";
 
-interface Todo {
+export interface Todo {
   id: number;
   text: string;
   completed: boolean;

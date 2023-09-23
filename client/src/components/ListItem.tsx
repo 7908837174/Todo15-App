@@ -1,4 +1,14 @@
-const ListItem = ({ item, toggleItem, removeItem }) => {
+import { Todo } from "../services/todo.service";
+
+const ListItem = ({
+  item,
+  toggleItem,
+  removeItem,
+}: {
+  item: Todo;
+  toggleItem: (x: number) => void;
+  removeItem: (x: number) => void;
+}) => {
   const onToggle = () => {
     toggleItem(item.id);
   };

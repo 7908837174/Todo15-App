@@ -3,29 +3,30 @@ import { useState, useEffect } from "react";
 import "./List.css";
 import AddItem from "./AddItem.tsx";
 import ListItem from "./ListItem.tsx";
-import todoService from "../services/todo.service.js";
+import todoService, { Todo } from "../services/todo.service.js";
 
 const List = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Todo[]>([]);
 
   const getItems = async () => {
     const result = await todoService.getTodos();
     setItems(result);
   };
 
-  const addItem = async (text) => {
+  const addItem = async (text: string) => {
     await todoService.addTodo(text);
     getItems();
   };
 
-  const removeItem = async (id) => {
+  const removeItem = async (id: number) => {
     await todoService.deleteTodo(id);
     getItems();
   };
 
-  const toggleItem = async (id) => {
+  const toggleItem = async (id: number) => {
     const foundItem = items.find((item) => item.id === id);
-    foundItem.completed = !foundItem.completed;
+    if (!foundItem) return;
+    foundItem.completed = !foundItem?.completed;
     await todoService.updateTodo(foundItem);
 
     getItems();
@@ -40,7 +41,7 @@ const List = () => {
       <AddItem handleSubmit={addItem} />
 
       <ul>
-        {items.map((item) => (
+        {items.map((item: Todo) => (
           <ListItem
             key={item.id}
             item={item}

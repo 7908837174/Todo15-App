@@ -1,22 +1,28 @@
-import { useState } from "react";
+import { FormEvent, FormEventHandler, useState } from "react";
 
 import "./AddItem.css";
 
-const AddItem = ({ handleSubmit }) => {
+const AddItem = ({
+  handleSubmit,
+}: {
+  handleSubmit: (text: string) => void;
+}) => {
   const [text, setText] = useState("");
 
-  const handleChange = (e) => {
-    setText(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e?.target?.value);
   };
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm: FormEventHandler<HTMLFormElement> = (
+    e: FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     handleSubmit(text);
     setText("");
   };
 
   return (
-    <form onSubmit={handleSubmitForm.bind(this)}>
+    <form onSubmit={handleSubmitForm}>
       <label htmlFor="newItem">Add to the todo list</label>
       <input
         type="text"
