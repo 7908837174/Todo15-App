@@ -1,2 +1,2 @@
 # Todo-App
-App to manage your todo list
+App to manage your todo list.
