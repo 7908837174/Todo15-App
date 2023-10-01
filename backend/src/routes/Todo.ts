@@ -6,49 +6,40 @@ const router = express.Router()
 const todoController = new TodoController()
 
 // TODO: handle errors
-router.get('/', (req, res) => {
-  todoController
-    .findAll()
-    .then((result) => {
-      res.json(result)
+router.get('/', async (req, res) => {
+  try {
+    const result = await todoController.findAll()
+    res.json(result)
+  } catch (err: any) {
+    res.status(500).json({
+      error: err.message,
     })
-    .catch((err) => {
-      res.status(500).json({
-        error: err.message,
-      })
-    })
+  }
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const body: TodoType = req.body
-
-  todoController
-    .create(body)
-    .then((result) => {
-      res.json(result)
+  try {
+    const result = await todoController.create(body)
+    res.json(result)
+  } catch (error: any) {
+    res.status(500).json({
+      error: error.message,
     })
-    .catch((err) => {
-      res.status(500).json({
-        error: err.message,
-      })
-    })
+  }
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const id = req.params.id as TodoType['id']
 
-  todoController
-    .delete(id)
-    .then((result) => {
-      console.log(result)
-
-      res.json(result)
+  try {
+    const result = await todoController.delete(id)
+    res.json(result)
+  } catch (error: any) {
+    res.status(500).json({
+      error: error.message,
     })
-    .catch((err) => {
-      res.status(500).json({
-        error: err.message,
-      })
-    })
+  }
 })
 
 export default router

@@ -3,8 +3,8 @@ import cors from 'cors'
 import todo from './src/routes/Todo'
 
 const allowedOrigins = [
-  'http://localhost:5173/',
-  'https://todo-app-seven-chi.vercel.app/',
+  'http://localhost:5173',
+  'https://todo-app-seven-chi.vercel.app',
 ]
 
 const app = express()
