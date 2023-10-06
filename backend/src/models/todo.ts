@@ -1,44 +1,26 @@
-import db from '../services/db/sqlite'
-import { type Todo as TodoType, type SqliteError } from '../types/todo.ts'
+import mongoose from 'mongoose'
+import { type Todo as TodoType } from '../types/todo.ts'
+
+const todoSchema = new mongoose.Schema({
+  description: String,
+  completed: Boolean,
+})
+
+const TodoModel = mongoose.model('Todo', todoSchema)
 
 export default class Todo {
   async findAll(): Promise<TodoType[]> {
-    return await new Promise((resolve, reject) => {
-      db.all('SELECT * FROM todo', (err: SqliteError, rows: TodoType[]) => {
-        if (err !== null) {
-          reject(err)
-          return
-        }
-        resolve(rows)
-      })
-    })
+    const result: TodoType[] = await TodoModel.find()
+    return result
   }
 
-  async create(body: TodoType): Promise<TodoType> {
-    return await new Promise((resolve, reject) => {
-      db.run(
-        'INSERT INTO todo (id, description, completed) VALUES (?, ?, ?)',
-        [body.id, body.description, body.completed],
-        (err: SqliteError) => {
-          if (err !== null) {
-            reject(err)
-            return
-          }
-          resolve(body)
-        }
-      )
-    })
+  async create(body: Partial<TodoType>): Promise<TodoType> {
+    const result: any = await TodoModel.create(body)
+    return result
   }
 
   async delete(id: TodoType['id']): Promise<TodoType['id']> {
-    return await new Promise((resolve, reject) => {
-      db.run('DELETE FROM todo WHERE id = ?', [id], (err: SqliteError) => {
-        if (err !== null) {
-          reject(err)
-          return
-        }
-        resolve(id)
-      })
-    })
+    await TodoModel.deleteOne({ _id: id })
+    return id
   }
 }
