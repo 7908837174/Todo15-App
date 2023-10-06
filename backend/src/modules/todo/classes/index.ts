@@ -1,15 +1,15 @@
-import type TodoModel from '../../../models/todo'
 import { type Todo as TodoType } from '../../../types/todo'
+import type { TodoService } from '../../../db/services'
 
 export default class TodoClass {
-  todo: TodoModel
+  todoService: TodoService
 
-  constructor({ todoModel }: { todoModel: TodoModel }) {
-    this.todo = todoModel
+  constructor({ todoService }: { todoService: TodoService }) {
+    this.todoService = todoService
   }
 
   async findAll(): Promise<TodoType[]> {
-    return await this.todo.findAll()
+    return await this.todoService.findAll()
   }
 
   async create(body: TodoType): Promise<TodoType> {
@@ -23,10 +23,13 @@ export default class TodoClass {
       completed: !!body.completed,
     }
 
-    return await this.todo.create(dataToInsert)
+    return await this.todoService.create(dataToInsert)
   }
 
   async delete(id: TodoType['id']): Promise<TodoType['id']> {
-    return await this.todo.delete(id)
+    const foundTodo = await this.todoService.findById(id)
+    if (!foundTodo) throw new Error('Todo not found')
+
+    return await this.todoService.delete(id)
   }
 }

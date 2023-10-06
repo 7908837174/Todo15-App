@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import todo from './src/routes/Todo'
-import './src/services/db/mongob'
+import './src/db/config'
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') ?? []
 
