@@ -1,13 +1,13 @@
-import TodoModel from '../../../models/todo'
 import TodoClass from '../classes'
 import { type Todo as TodoType } from '../../../types/todo'
+import { TodoService } from '../../../db/services'
 
 export default class TodoController {
   todoClass: TodoClass
 
   constructor() {
     this.todoClass = new TodoClass({
-      todoModel: new TodoModel(),
+      todoService: new TodoService(),
     })
   }
 
