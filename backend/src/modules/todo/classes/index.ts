@@ -18,7 +18,7 @@ export default class TodoClass {
     }
 
     const dataToInsert = {
-      id: body.id || crypto.randomUUID(),
+      // id: body.id || crypto.randomUUID(),
       description: body.description,
       completed: !!body.completed,
     }
