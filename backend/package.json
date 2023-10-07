@@ -1,10 +1,10 @@
 {
   "name": "todo",
-  "module": "index.ts",
+  "module": "src/app.ts",
   "type": "module",
   "scripts": {
-    "start": "bun --hot index.ts",
-    "dev": "bun --hot index.ts"
+    "start": "bun src/app.ts",
+    "dev": "bun --hot src/app.ts"
   },
   "devDependencies": {
     "@types/cors": "^2.8.14",

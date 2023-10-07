@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import todo from './src/routes/Todo'
+import todo from './routes/Todo'
 import './src/db/config'
 
 const PORT = process.env.PORT ?? 3000
