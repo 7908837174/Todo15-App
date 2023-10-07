@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import todo from './routes/Todo'
-import './src/db/config'
+import './db/config'
 
 const PORT = process.env.PORT ?? 3000
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') ?? []
