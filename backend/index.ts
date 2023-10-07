@@ -3,6 +3,7 @@ import cors from 'cors'
 import todo from './src/routes/Todo'
 import './src/db/config'
 
+const PORT = process.env.PORT ?? 3000
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') ?? []
 
 const app = express()
@@ -26,6 +27,6 @@ app.use(
 
 app.use('/todo', todo)
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000')
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`)
 })
