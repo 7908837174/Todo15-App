@@ -29,5 +29,6 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'import/no-absolute-path': 'off',
+    '@typescript-eslint/comma-dangle': 'off',
   },
 }
