@@ -1,7 +1,6 @@
 import type { TodoType } from '../types.d'
 
-// TODO: pending to move this to .env
-const API_URL = 'https://lismore-bilby-khdq.1.us-1.fl0.io'
+const API_URL = import.meta.env.VITE_API_URL
 
 export const getTodoList = async (): Promise<TodoType[]> => {
   const response = await fetch(`${API_URL}/todo`)

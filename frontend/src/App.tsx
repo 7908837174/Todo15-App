@@ -7,9 +7,6 @@ const App: React.FC = () => {
   const [todoList, setTodoList] = useState([] as TodoType[])
 
   useEffect(() => {
-    alert(
-      'Currently working on deploy the backend. so the frontend is not working yet. :c'
-    )
     getTodoList()
       .then((res) => {
         setTodoList(res)
