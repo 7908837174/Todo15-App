@@ -18,9 +18,14 @@ const funnyTodoPlaceholders = [
 interface Props {
   todoList: any[]
   createTodoHandler: (description: string) => Promise<void>
+  deleteTodoHandler: (id: string) => Promise<void>
 }
 
-const Todo: React.FC<Props> = ({ todoList, createTodoHandler }: Props) => {
+const Todo: React.FC<Props> = ({
+  todoList,
+  createTodoHandler,
+  deleteTodoHandler,
+}: Props) => {
   const [input, setInput] = useState('')
 
   return (
@@ -76,8 +81,10 @@ const Todo: React.FC<Props> = ({ todoList, createTodoHandler }: Props) => {
         {todoList.map((todo) => (
           <TodoItem
             key={todo._id}
+            _id={todo._id}
             description={todo.description}
             completed={todo.completed}
+            deleteTodoHandler={deleteTodoHandler}
           />
         ))}
       </ul>
