@@ -1,9 +1,16 @@
 interface Props {
+  _id: string
   description: string
   completed: boolean
+  deleteTodoHandler: (id: string) => Promise<void>
 }
 
-const TodoItem: React.FC<Props> = ({ description, completed }: Props) => (
+const TodoItem: React.FC<Props> = ({
+  _id,
+  description,
+  completed,
+  deleteTodoHandler,
+}: Props) => (
   <li className="flex items-center justify-start px-4 py-6 mb-3 bg-white rounded-lg shadow">
     <div className="flex items-center w-full">
       <input
@@ -17,7 +24,14 @@ const TodoItem: React.FC<Props> = ({ description, completed }: Props) => (
       </span>
     </div>
     <div className="flex items-center ">
-      <button className="p-2 bg-red-500 rounded-xl">
+      <button
+        className="p-2 bg-red-500 rounded-xl"
+        onClick={() => {
+          deleteTodoHandler(_id)
+            .then(() => {})
+            .catch(() => {})
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="text-white"

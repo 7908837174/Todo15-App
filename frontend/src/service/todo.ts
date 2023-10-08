@@ -20,3 +20,12 @@ export const createTodo = async (
   }
   return result
 }
+
+export const deleteTodo = async (id: string): Promise<void> => {
+  const response = await fetch(`http://localhost:3000/todo/${id}`, {
+    method: 'DELETE',
+  })
+  if (response.status !== 200) {
+    throw new Error('Error')
+  }
+}
